@@ -54,7 +54,21 @@ class Quest implements IQuest{
 		$str = nl2br($str);
 		return $str;
 	}
-	function editQuest($id){}
+	function editQuest($id){
+		$sql = "SELECT id, name, email, quest, datetime FROM quests WHERE id = $id";
+		$res= $this->_db->query($sql);
+		$arr = array();
+		while($row = $res->fetchArray(SQLITE3_ASSOC)){
+			$arr[] = $row;
+		}
+		return $arr;
+	}
+	
+	function updateQuest($id, $name, $email, $quest, $datetime){
+		$sql = "UPDATE quests SET name = '$name', email = '$email', quest = '$quest', datetime = '$datetime' WHERE id = $id";
+		$this->_db->exec($sql) or die ('Всё плохо');
+	}
+	
 	function deleteQuest($id){
 		$sql = "DELETE FROM quests WHERE id = $id";
 		$this->_db->exec($sql) or die ('Всё плохо');

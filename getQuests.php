@@ -13,6 +13,8 @@ $arr = $Quests->getQuest();
 			<p>Отзыв : $quest</p>
 			<p>Почта : $email</p>
 			<p>Время : $datetime</p>
-			<p align='right'><a href='index.php?del=$id'>Удалить</a></p><hr>";			
+			<p align='right'><a href='index.php?del=$id'>Удалить</a>
+			<a href='index.php?edit=$id'>Изменить</a></p>			
+			<hr>";			
 }
 ?>
