@@ -13,14 +13,15 @@ class Quest implements IQuest{
 						id INTEGER PRIMARY KEY AUTOINCREMENT,
 						name TEXT,
 						email TEXT,
-						quest TEXT)";
+						quest TEXT,
+						datetime DATETIME)";
 			$this->_db->exec($sql) or die ('Всё плохо');			
 		}
 		
 	}
 	
 	function getQuest(){
-		$sql = "SELECT id, name, email, quest FROM quests ORDER BY id DESC";
+		$sql = "SELECT id, name, email, quest, datetime FROM quests ORDER BY id DESC";
 		$res= $this->_db->query($sql);
 		$arr = array();
 		while($row = $res->fetchArray(SQLITE3_ASSOC)){
@@ -29,13 +30,18 @@ class Quest implements IQuest{
 		return $arr;
 	}
 	
-	function saveQuest($name, $email, $quest){
+	function saveQuest($name, $email, $quest, $datetime){
 		$sql = "INSERT INTO quests(
 						name, 
 						email, 
-						quest) 
-					VALUES('$name', '$email', '$quest')";
+						quest,
+						datetime) 
+					VALUES('$name', '$email', '$quest', '$datetime')";
 		$this->_db->exec($sql) or die ('Всё плохо');
+	}
+	
+	function clearInt($int){
+		return $int = (int)abs($int);
 	}
 	function clearName($str){
 		$str = trim(strip_tags($str));
